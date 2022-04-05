@@ -1,0 +1,42 @@
+<odoo>
+  <data>
+    <record id="casacultura.report_actividades" model="ir.actions.report">
+      <field name="name">Informe de actividades</field>
+      <field name="model">casacultura.actividades</field>
+      <field name="report_type">qweb-html</field>
+      <field name="report_name">casacultura.actividades_report_view</field>
+      <field name="report_file">casacultura.actividades_report</field>
+      <field name="binding_model_id" ref="model_casacultura_actividades"/>
+      <field name="binding_type">report</field>
+    </record>
+
+    <template id="actividades_report_view">
+      <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Actividades</h2>
+            <br/>
+            <t t-foreach="docs" t-as="actividades">
+              <div style="padding-left: 50px">
+                <h4><span t-field="actividades.name"/></h4>
+                <div style="padding-left: 20px">
+                  <p><strong>Descripción </strong><span t-field="actividades.description"/></p>
+                  <p><strong>Categoría </strong><span t-field="actividades.category"/></p>
+                  <p><strong>Fecha </strong><span t-field="actividades.date"/></p>
+                  <p><strong>Precio </strong><span t-field="actividades.price"/></p>
+                  <p><strong>Monitor</strong></p>
+                    <div style="padding-left: 20px">
+                      <p><strong>Nombre </strong><span t-field="actividades.instructor.name"/></p>
+                      <p><strong>DNI </strong><span t-field="actividades.instructor.dni"/></p>
+                      <p><strong>Teléfono </strong><span t-field="actividades.instructor.phone"/></p>
+                    </div>
+                </div>
+                <br/>
+              </div>
+            </t>
+          </div>
+        </t>
+      </t>
+    </template>
+  </data>
+</odoo>

@@ -1,0 +1,37 @@
+<odoo>
+  <data>
+    <record id="casacultura.report_pagos" model="ir.actions.report">
+      <field name="name">Informe de pagos</field>
+      <field name="model">casacultura.pagos</field>
+      <field name="report_type">qweb-html</field>
+      <field name="report_name">casacultura.pagos_report_view</field>
+      <field name="report_file">casacultura.pagos_report</field>
+      <field name="binding_model_id" ref="model_casacultura_pagos"/>
+      <field name="binding_type">report</field>
+    </record>
+
+    <template id="pagos_report_view">
+      <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Pagos</h2>
+            <br/>
+            <t t-foreach="docs" t-as="pagos">
+              <div style="padding-left: 50px">
+                <h4>Código de la reserva: <span t-field="pagos.reservation"/></h4>
+                <div style="padding-left: 20px">
+                  <p><strong>Cliente </strong><span t-field="pagos.reservation.user"/></p>
+                  <p><strong>Actividad </strong><span t-field="pagos.reservation.activity"/></p>
+                  <p><strong>Fecha </strong><span t-field="pagos.date"/></p>
+                  <p><strong>Importe </strong><span t-field="pagos.totalprice"/></p>
+                  <p><strong>Método de pago </strong><span t-field="pagos.paymentMethod"/></p>
+                </div>
+                <br/>
+              </div>
+            </t>
+          </div>
+        </t>
+      </t>
+    </template>
+  </data>
+</odoo>

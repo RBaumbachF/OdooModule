@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+usuarios_responsable,usuarios responsable,model_casacultura_usuarios,casacultura.group_casacultura_manager,1,1,1,1
+usuarios_usuario,usuarios usuario,model_casacultura_usuarios,casacultura.group_casacultura_user,1,0,0,0
+actividades_responsable,actividades responsable,model_casacultura_actividades,casacultura.group_casacultura_manager,1,1,1,1
+actividades_usuario,actividades usuario,model_casacultura_actividades,casacultura.group_casacultura_user,1,0,0,0
+reservas_responsable,reservas responsable,model_casacultura_reservas,casacultura.group_casacultura_manager,1,1,1,1
+reservas_usuario,reservas usuario,model_casacultura_reservas,casacultura.group_casacultura_user,1,0,0,0
+pagos_responsable,pagos responsable,model_casacultura_pagos,casacultura.group_casacultura_manager,1,1,1,1
+pagos_usuario,pagos usuario,model_casacultura_pagos,casacultura.group_casacultura_user,1,0,0,0

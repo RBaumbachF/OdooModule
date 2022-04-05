@@ -1,0 +1,216 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="casacultura.usuarios_tree">
+      <field name="name">casacultura.usuarios.tree</field>
+      <field name="model">casacultura.usuarios</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="dni"/>
+          <field name="phone"/>
+          <field name="birthDate"/>
+          <field name="age"/>
+          <field name="type"/>
+          <field name="reservations" attrs="{'invisible': [('type', '!=', 'client')]}"/>
+          <field name="activities" attrs="{'invisible': [('type', '!=', 'instructor')]}"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.usuarios_form">
+      <field name="name">casacultura.usuarios.form</field>
+      <field name="model">casacultura.usuarios</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="dni"/>
+            <field name="phone"/>
+            <field name="birthDate"/>
+            <field name="age"/>
+            <field name="type"/>
+            <field name="reservations" attrs="{'invisible': [('type', '!=', 'client')]}">
+              <tree>
+                <field name="activity"/>
+                <field name="date"/>
+                <field name="price"/>
+                <!-- <field name="totalprice"/> -->
+              </tree>
+            </field>
+            <field name="activities" attrs="{'invisible': [('type', '!=', 'instructor')]}"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.usuarios_search_view">
+      <field name="name">casacultura.usuarios.view.search</field>
+      <field name="model">casacultura.usuarios</field>
+      <field name="arch" type="xml">
+        <search>
+          <field name="name"/>
+          <field name="dni"/>
+          <filter name="type" string="Clientes" domain="[('type', '=', 'client')]"/>
+          <filter name="type" string="Monitores" domain="[('type', '=', 'instructor')]"/>
+          <group>
+            <filter name="group_by_type" string="Tipo de usuario" context="{'group_by':'type'}"/>
+          </group>
+        </search>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.usuarios_kanban">
+      <field name="name">casacultura.usuarios.kanban</field>
+      <field name="model">casacultura.usuarios</field>
+      <field name="arch" type="xml">
+        <kanban class="o_res_partner_kanban">>
+          <field name="name"/>
+          <templates>
+            <t t-name="kanban-box">
+              <div t-attf-class="oe_kanban_global_click">
+                <h1><field name="name"/></h1>
+                <br/>
+                <strong>Edad</strong>:<field name="age"/>
+                <br/>
+                <strong>Tipo de usuario</strong>:<field name="type"/>
+              </div>
+            </t>
+          </templates>
+        </kanban>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="casacultura.usuarios_action_window">
+      <field name="name">Usuarios</field>
+      <field name="res_model">casacultura.usuarios</field>
+      <field name="view_mode">tree,form,kanban</field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.actividades_tree">
+      <field name="name">casacultura.actividades.tree</field>
+      <field name="model">casacultura.actividades</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="category"/>
+          <field name="date"/>
+          <field name="price"/>
+          <field name="instructor"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.actividades_form">
+      <field name="name">casacultura.actividades.form</field>
+      <field name="model">casacultura.actividades</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="name"/>
+            <field name="description"/>
+            <field name="category"/>
+            <field name="date"/>
+            <field name="price"/>
+            <field name="instructor" domain="[('type','=','instructor')]"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.actividades_calendar">
+      <field name="name">casacultura.actividades.calendar</field>
+      <field name="model">casacultura.actividades</field>
+      <field name="arch" type="xml">
+        <calendar string="Calendario de actividades" date_start="date" color="category" mode="month">
+          <field name="date"/>
+          <field name="category"/>
+        </calendar>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="casacultura.actividades_action_window">
+      <field name="name">Actividades</field>
+      <field name="res_model">casacultura.actividades</field>
+      <field name="view_mode">tree,form,calendar</field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.reservas_tree">
+      <field name="name">casacultura.reservas.tree</field>
+      <field name="model">casacultura.reservas</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="user"/>
+          <field name="age"/>
+          <field name="activity"/>
+          <field name="date"/>
+          <field name="price"/>
+          <!-- <field name="totalprice"/> -->
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.reservas_form">
+      <field name="name">casacultura.reservas.form</field>
+      <field name="model">casacultura.reservas</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="user" domain="[('type','=','client')]"/>
+            <field name="age"/>
+            <field name="activity"/>
+            <field name="date"/>
+            <field name="price"/>
+            <!-- <field name="totalprice"/> -->
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="casacultura.reservas_action_window">
+      <field name="name">Reservas</field>
+      <field name="res_model">casacultura.reservas</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.pagos_tree">
+      <field name="name">casacultura.pagos.tree</field>
+      <field name="model">casacultura.pagos</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="reservation"/>
+          <field name="paymentMethod"/>
+          <field name="date"/>
+          <field name="totalprice"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="casacultura.pagos_form">
+      <field name="name">casacultura.pagos.form</field>
+      <field name="model">casacultura.pagos</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="reservation"/>
+            <field name="paymentMethod"/>
+            <field name="date"/>
+            <field name="totalprice"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="casacultura.pagos_action_window">
+      <field name="name">Pagos</field>
+      <field name="res_model">casacultura.pagos</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Casacultura" id="casacultura.menu_root"/>
+    <menuitem name="Usuarios" id="casacultura.usuarios_menu" parent="casacultura.menu_root" action="casacultura.usuarios_action_window"/>
+    <menuitem name="Actividades" id="casacultura.actividades_menu" parent="casacultura.menu_root" action="casacultura.actividades_action_window"/>
+    <menuitem name="Reservas" id="casacultura.reservas_menu" parent="casacultura.menu_root" action="casacultura.reservas_action_window"/>
+    <menuitem name="Pagos" id="casacultura.pagos_menu" parent="casacultura.menu_root" action="casacultura.pagos_action_window"/>
+  </data>
+</odoo>

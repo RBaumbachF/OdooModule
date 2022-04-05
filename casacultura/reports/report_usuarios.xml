@@ -1,0 +1,97 @@
+<odoo>
+  <data>
+    <record id="casacultura.report_usuarios" model="ir.actions.report">
+      <field name="name">Informe de usuarios</field>
+      <field name="model">casacultura.usuarios</field>
+      <field name="report_type">qweb-html</field>
+      <field name="report_name">casacultura.usuarios_report_view</field>
+      <field name="report_file">casacultura.usuarios_report</field>
+      <field name="binding_model_id" ref="model_casacultura_usuarios"/>
+      <field name="binding_type">report</field>
+    </record>
+
+    <template id="usuarios_report_view">
+      <t t-call="web.html_container">
+        <t t-call="web.external_layout">
+          <div class="page">
+            <h2>Usuarios</h2>
+            <br/>
+            <t t-foreach="docs" t-as="usuarios">
+              <div style="padding-left: 50px">
+                <h4><span t-field="usuarios.name"/></h4>
+                <div style="padding-left: 20px">
+                  <p><strong>DNI </strong><span t-field="usuarios.dni"/></p>
+                  <p><strong>Teléfono </strong><span t-field="usuarios.phone"/></p>
+                  <p><strong>Fecha de nacimiento </strong><span t-field="usuarios.birthDate"/></p>
+                  <p><strong>Edad </strong><span t-field="usuarios.age"/></p>
+                  <p><strong>Tipo de usuario </strong><span t-field="usuarios.type"/></p>
+
+                  <t t-if="usuarios.type == 'client'">
+                    <p><strong>Actividades realizadas </strong></p>
+                    <div style="padding-left: 20px">
+                    <table class="table table·sm o_main_table">
+                      <thread>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Fecha</th>
+                          <th>Precio</th>
+                          <th>Importe total</th>
+                        </tr>
+                      </thread>
+                      <tbody>
+                        <t t-set="i" t-value="0"/>
+                        <t t-foreach="usuarios.reservations" t-as="reservas">
+                          <t t-set="i" t-value="i+1"/>
+                          <tr>
+                            <td><span t-field="reservas.activity"/></td>
+                            <td><span t-field="reservas.date"/></td>
+                            <td><span t-field="reservas.price"/></td>
+                            <!-- <td><span t-field="reservas.totalprice"/></td> -->
+                          </tr>
+                        </t>
+                      </tbody>
+                    </table>
+                    </div>
+                    <p><strong>Número de reservas realizadas </strong><span t-esc="i"/></p>
+                  </t>
+
+                  <t t-if="usuarios.type == 'instructor'">
+                    <p><strong>Actividades impartidas </strong></p>
+                    <div style="padding-left: 20px">
+                    <table class="table table·sm o_main_table">
+                      <thread>
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Descripción</th>
+                          <th>Categoría</th>
+                          <th>Fecha</th>
+                          <th>Precio</th>
+                        </tr>
+                      </thread>
+                      <tbody>
+                        <t t-set="i" t-value="0"/>
+                        <t t-foreach="usuarios.activities" t-as="actividades">
+                          <t t-set="i" t-value="i+1"/>
+                          <tr>
+                            <td><span t-field="actividades.name"/></td>
+                            <td><span t-field="actividades.description"/></td>
+                            <td><span t-field="actividades.category"/></td>
+                            <td><span t-field="actividades.date"/></td>
+                            <td><span t-field="actividades.price"/></td>
+                          </tr>
+                        </t>
+                      </tbody>
+                    </table>
+                    </div>
+                    <p><strong>Número de actividades impartidas </strong><span t-esc="i"/></p>
+                  </t>
+                </div>
+                <br/>
+              </div>
+            </t>
+          </div>
+        </t>
+      </t>
+    </template>
+  </data>
+</odoo>

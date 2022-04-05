@@ -1,0 +1,105 @@
+<!--DATOS QUE SE CARGAN SIEMPRE EN LA APLICACIÓN-->
+<odoo>
+  <data>
+<!-- USUARIOS -->
+    <record id="usuario1" model="casacultura.usuarios">
+      <field name="name">Alejandra</field>
+      <field name="dni">45998601G</field>
+      <field name="phone">678 451 882</field>
+      <field name="birthDate">2001-12-21</field>
+      <field name="type">client</field>
+    </record>
+
+    <record id="usuario2" model="casacultura.usuarios">
+      <field name="name">Manuel</field>
+      <field name="dni">45398001F</field>
+      <field name="phone">679 843 677</field>
+      <field name="birthDate">2002-2-21</field>
+      <field name="type">client</field>
+    </record>
+
+    <record id="usuario3" model="casacultura.usuarios">
+      <field name="name">Elvira</field>
+      <field name="dni">45834822C</field>
+      <field name="phone">618 955 654</field>
+      <field name="birthDate">1999-1-5</field>
+      <field name="type">instructor</field>
+    </record>
+
+    <record id="usuario4" model="casacultura.usuarios">
+      <field name="name">Marcos</field>
+      <field name="dni">48758420H</field>
+      <field name="phone">748 651 279</field>
+      <field name="birthDate">2000-12-01</field>
+      <field name="type">client</field>
+    </record>
+
+    <record id="usuario5" model="casacultura.usuarios">
+      <field name="name">Pablo</field>
+      <field name="dni">48716533Q</field>
+      <field name="phone">635 989 146</field>
+      <field name="birthDate">1991-2-2</field>
+      <field name="type">instructor</field>
+    </record>
+
+<!-- ACTIVIDADES -->
+    <record id="actividad1" model="casacultura.actividades">
+      <field name="name">Museo del Prado</field>
+      <field name="description">Viaje de ida y vuelta en el mismo día para visitar el museo madrileño</field>
+      <field name="category">trip</field>
+      <field name="date">2022-05-24 10:30:00</field>
+      <field name="price">25</field>
+      <field name="instructor" ref="usuario3"/>
+    </record>
+
+    <record id="actividad2" model="casacultura.actividades">
+      <field name="name">Caligrafía</field>
+      <field name="description">Taller en el que se enseñarán diferentes tipos de caligrafía moderna y clásica</field>
+      <field name="category">workshop</field>
+      <field name="date">2022-04-01 16:00:00</field>
+      <field name="price">10</field>
+      <field name="instructor" ref="usuario5"/>
+    </record>
+
+    <record id="actividad3" model="casacultura.actividades">
+      <field name="name">Alimentación saludable</field>
+      <field name="description">Consejos para construir una dieta sana</field>
+      <field name="category">talk</field>
+      <field name="date">2022-04-16 18:45:00</field>
+      <field name="price">5</field>
+      <field name="instructor" ref="usuario5"/>
+    </record>
+
+<!-- RESERVAS -->
+    <record id="reserva1" model="casacultura.reservas">
+      <field name="user" ref="usuario2"/>
+      <field name="activity" ref="actividad1"/>
+    </record>
+
+    <record id="reserva2" model="casacultura.reservas">
+      <field name="user" ref="usuario4"/>
+      <field name="activity" ref="actividad3"/>
+    </record>
+
+    <record id="reserva3" model="casacultura.reservas">
+      <field name="user" ref="usuario1"/>
+      <field name="activity" ref="actividad2"/>
+    </record>
+
+<!-- RESERVAS -->
+    <record id="pagos1" model="casacultura.pagos">
+      <field name="reservation" ref="reserva1"/>
+      <field name="paymentMethod">cash</field>
+    </record>
+
+    <record id="pagos2" model="casacultura.pagos">
+      <field name="reservation" ref="reserva2"/>
+      <field name="paymentMethod">paypal</field>
+    </record>
+
+    <record id="pagos3" model="casacultura.pagos">
+      <field name="reservation" ref="reserva3"/>
+      <field name="paymentMethod">card</field>
+    </record>
+  </data>
+</odoo>
